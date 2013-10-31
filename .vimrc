@@ -48,7 +48,7 @@ nnoremap <Esc>8 gt8
 
 "TagList
 "F1 開關視窗
-nnoremap <silent> <F1> :TlistToggle<CR>  
+nnoremap <silent> <F6> :TlistToggle<CR>  
 let Tlist_Exit_OnlyWindow = 1 		"視窗剩下Taglist的時候自動關閉
 let Tlist_Use_Right_Window=1 
 let Tlist_Show_Menu=1
