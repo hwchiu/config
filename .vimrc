@@ -17,6 +17,7 @@ set backspace=2 		    "按下backspace會後退，道行首後會刪除到前一
 set showmatch			    "顯示括號配對情況
 set nocompatible			"用vim的特性去運行，捨棄vi的特性
 
+let python_highlight_all = 1
  
 filetype plugin indent on
  
@@ -46,8 +47,13 @@ nnoremap <Esc>7 gt7
 nnoremap <Esc>8 gt8
 
 "TagList
+"F1 開關視窗
+nnoremap <silent> <F1> :TlistToggle<CR>  
+let Tlist_Exit_OnlyWindow = 1 		"視窗剩下Taglist的時候自動關閉
+let Tlist_Use_Right_Window=1 
+let Tlist_Show_Menu=1
 
-let python_highlight_all = 1
+
 
 let iCanHazVundle=1
 let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
