@@ -1,0 +1,31 @@
+altscreen on # erase screen when quit apps
+defutf8 on
+defc1 off # treat input chars 128 ~ 159 as control functions
+defflow on
+startup_message off
+shell $SHELL
+defencoding utf8
+bindkey "^u"  encoding big5 utf8
+bindkey "^b"  encoding utf8 big5
+defbce on # erase background with current bg color
+shelltitle "--"
+cjkwidth on
+caption always "%{WK}%-w%<%{=B GK}%n %t%{= KW}%+w%-09="
+hardstatus alwayslastline "%{R}[ %{w}%1` %{R}]%=%{M}%e %{G}%H %{Y} %c %{R} %d/%m/%Y %{K} Load: %l %{w}"
+screen -t bsd            0
+screen -t bbs            1
+screen -t irssi          2
+screen -t ptt            3
+bindkey \033[D prev
+bindkey \033[C next
+bindkey "^[[1;5D" prev
+bindkey "^[[1;5C" next
+bind s
+bind k
+bind W
+bind ^k
+bind .
+bind ^\
+bind \\
+bind ^h
+bind h
