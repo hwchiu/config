@@ -1,0 +1,8 @@
+[user]
+	name = hwchiu
+	email = sppsorrg@gmail.com
+[alias]
+	br = branch
+	st = status
+	ch = checkout
+	com = commit
