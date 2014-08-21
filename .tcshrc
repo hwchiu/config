@@ -1,0 +1,98 @@
+set dspmbyte = big5
+set nobeep
+set autolist
+set notify
+set color
+setenv PATH "${HOME}/bin:${PATH}:/usr/local/adm/bin"
+setenv CLICOLOR
+setenv LANG en_US.UTF-8
+setenv LC_ALL en_US.UTF-8
+setenv LC_TYPE en_US.UTF-8
+setenv EDITOR "vim"
+setenv PAGER "less"
+
+if ( ! $?HOST ) then
+    setenv HOST `hostname -s`
+endif
+if ( -r /etc/inputrc && ! $?INPUTRC ) then
+    setenv INPUTRC /etc/inputrc
+endif
+
+
+if ($?prompt) then
+  if(! $?WINDOW ) then
+    set prompt="%{^[[1;36m%}%T%{^[[m%} %{^[[1;33m%}%n%{^[[m%}@%{^[[1;37m%}%m %{^[[1;32m%}[%~]%{^[[m%} >"
+  else
+    set prompt="%{^[[1;36m%}%t%{^[[m%} %{^[[1;33m%}%n%{^[[m%}@%{^[[1;37m%}%m %{^[[1;32m%}[%~]%{^[[m%} %{^[[1;35m%}[W$WINDOW]%{^[[m%} >"
+  endif
+  if ($?tcsh) then
+    bindkey "^W" backward-delete-word
+    bindkey -k up history-search-backward
+    bindkey -k down history-search-forward
+  endif
+endif
+##
+## Handle history
+##
+set history = 200
+set histdup = erase
+if ( $?TCSH_SHELL_SAVEHISTORY ) then
+    set savehist = ( $history merge )
+else
+    unset savehist
+endif
+
+switch ( $OSTYPE ) 
+	case linux:
+		alias ls 'ls --color=auto'
+		setenv LANG en_US.UTF-8
+		breaksw
+	case FreeBSD:
+		setenv LANG en_US.UTF-8
+		breaksw
+	endsw
+end:
+
+# INSERT : toggles overwrite or insert mode.
+bindkey    ^[[2~  overwrite-mode 
+
+# DELETE : delete char at cursor position.
+bindkey    ^[[3~  delete-char
+
+# HOME : go to the beginning of the line.
+bindkey    ^[[1~  beginning-of-line
+
+# END : go to the end of the line.
+bindkey    ^[[4~  end-of-line
+
+# PAGE UP : search in history backwards for line beginning as current.
+bindkey    ^[[5~   history-search-backward
+
+# PAGE DOWN : search in history forwards for line beginning as current.
+bindkey    ^[[6~   history-search-forward
+
+#umask 77 
+umask 22
+
+
+
+setenv BLOCKSIZE "k"
+
+alias ll 'ls -lh'
+alias bs2 'telnet bs2.to'
+alias ptt 'ssh bbsu@ptt.cc'
+alias s 'ssh'
+alias sc 'screen -rd'
+alias g 'grep --color -i'
+alias cl 'clear'
+#============================================================================#
+# For colourful man pages
+#============================================================================#
+setenv LESS_TERMCAP_mb '[38;5;135m' # begin blinking
+setenv LESS_TERMCAP_md '[38;5;220m' # begin bold
+setenv LESS_TERMCAP_me '[0m' # end mode
+setenv LESS_TERMCAP_so '[38;5;225m' # begin standout-mode - info box
+setenv LESS_TERMCAP_se '[0m' # end standout-mode
+setenv LESS_TERMCAP_us '[2;1;4;32m' # begin underline
+setenv LESS_TERMCAP_ue '[0m' # end underline
+
