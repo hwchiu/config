@@ -55,11 +55,6 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-fi
 unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
@@ -108,7 +103,11 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-function parse_git_branch { 
-   git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/' 
+export GIT_AUTHOR_NAME=hungweic
+export GIT_AUTHOR_EMAIL=hungweic@synology.com
+function parse_git_branch {
+   git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 }
-export PS1="\[\e[34;0m\]\t \$(parse_git_branch)[\h]:\W \u\\$ \[\e[0m\]"
+export PS1="\033[32m\h:\033[31m\T \033[34m[\W]\033[33m\$(parse_git_branch)\033[37m\u\ \$\033[35m:"
+export PS1="$PS1\n"
+export  LANG
