@@ -1,5 +1,7 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
+bind '"\x1b\x5b\x41":history-search-backward'   # Up
+bind '"\x1b\x5b\x42":history-search-forward'    # Down
 # for examples
 export NOX_CORE_DIR=$BUILD_DIR/noxcore/build/src
 export NOX_CORE_DIR=$BUILD_DIR/noxcore/build/src
