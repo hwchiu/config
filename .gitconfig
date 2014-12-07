@@ -1,8 +1,19 @@
 [user]
 	name = hwchiu
 	email = hwchiu@cs.nctu.edu.tw
+[core]
+	editor = vim
+[color]
+	ui = auto
+	diff = auto
+	status = auto
+	branch = auto
+	log = auto
 [alias]
 	br = branch
 	st = status
 	ch = checkout
 	com = commit
+	co = checkout
+	df = diff
+	la = log --graph --decorate --pretty=oneline --abbrev-commit --all
