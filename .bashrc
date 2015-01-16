@@ -110,4 +110,4 @@ export GIT_AUTHOR_EMAIL=hungweic@synology.com
 function parse_git_branch {
    git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 }
-export PS1="\033[32m\h:\033[31m\T \033[33m[\W]\033[33m\$(parse_git_branch)\033[37m\u\\033[37m\n\$"
+export PS1="\033[32m\h:\033[31m\T \033[33m[\w]\033[33m\$(parse_git_branch)\033[37m\u\\033[37m\n\$"

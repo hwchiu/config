@@ -61,6 +61,8 @@ call vundle#rc()
 Bundle 'https://github.com/scrooloose/nerdtree'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'marijnh/tern_for_vim'
+
+
 " for yum
 let g:ycm_error_symbol = '>>'
 let g:ycm_warning_symbol = '>*'
@@ -78,3 +80,5 @@ autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 highlight ExtraWhitespace ctermbg=darkblue guibg=bule
 
+syntax enable
+colorscheme monokai
