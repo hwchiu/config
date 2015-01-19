@@ -82,3 +82,8 @@ highlight ExtraWhitespace ctermbg=darkblue guibg=bule
 
 syntax enable
 colorscheme monokai
+
+function DoCscope ()
+	:!find ./ -name '*.c' -o -name '*.h' -o -name '*.cpp' -o -name '*.hpp' > cscope.files
+	:!cscope -Rbq -i cscope.files
+endfunction
