@@ -74,14 +74,18 @@ let g:ycm_key_invoke_completion = ''
 let g:ycm_extra_conf_globlist = ['~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/','!~/*']
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 
-" for white space
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-highlight ExtraWhitespace ctermbg=darkblue guibg=bule
-
 syntax enable
 colorscheme monokai
+
+" for white space
+" if(.*) => if(xxx)
+" ){ =>  if (xxx){
+" (\s.*) => if ( xxx) {
+" }\n\{0,1}\<\(int\|string\|bool\|static\|void\)\ => for functions
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$\|if(.*)\|){\|(\s.*)\|}\n\{0,1}\<\(int\|string\|bool\|static\|void\)\>/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$\|if(.*)\|){\|(\s.*)\|}\n\{0,1}\<\(int\|string\|bool\|static\|void\)\>/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$\|if(.*)\|){\|(\s.*)\|}\n\{0,1}\<\(int\|string\|bool\|static\|void\)\>/
+highlight ExtraWhitespace ctermbg=darkblue guibg=bule
 
 function DoCscope ()
 	:!find ./ -name '*.c' -o -name '*.h' -o -name '*.cpp' -o -name '*.hpp' > cscope.files
