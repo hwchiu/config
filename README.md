@@ -3,5 +3,7 @@
 	- type ":BundleInstall" to install the plugin
 	- "Clang-complete needs clang"
 	- "You should install exuberant-ctags before taglist"
- 	
- Test
+
+Git Config
+----------
+	- git config --global core.excludesfile ~/.gitignore_global (adding the global config)
