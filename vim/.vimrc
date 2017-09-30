@@ -12,6 +12,7 @@ set t_Co=256                " support 256 color
 set backspace=2
 set nocompatible
 set shiftwidth=4
+set noswapfile
 let python_highlight_all = 1
 
 filetype plugin indent on
