@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/hwchiu/.oh-my-zsh
+export ZSH=/home/ubuntu/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -85,8 +85,10 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 export BB_CLIENT_ID="LmsNEkWVKvdJfKxCVV"
 export BB_CLIENT_SECRET="NEeVV88f8jEqrnmGva24C3pmtnNU8TTk"
-source /Users/hwchiu/google-cloud-sdk/path.zsh.inc
-source /Users/hwchiu/google-cloud-sdk/completion.zsh.inc
+if [ -d "/Users/hwchiu/google-cloud-sdk" ]; then
+	source /Users/hwchiu/google-cloud-sdk/path.zsh.inc
+	source /Users/hwchiu/google-cloud-sdk/completion.zsh.inc
+fi
 export GOPATH=$HOME/go/ # don't forget to change your path correctly!
 export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOPATH/bin
