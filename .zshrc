@@ -4,6 +4,15 @@
 # Path to your oh-my-zsh installation.
 export ZSH=/home/ubuntu/.oh-my-zsh
 
+unameOut="$(uname -s)"
+case "${unameOut}" in
+    Linux*)     machine=Linux;;
+    Darwin*)    machine=Mac;;
+    CYGWIN*)    machine=Cygwin;;
+    MINGW*)     machine=MinGw;;
+    *)          machine="UNKNOWN:${unameOut}"
+esac
+
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
@@ -93,5 +102,7 @@ export GOPATH=$HOME/go/ # don't forget to change your path correctly!
 export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
+if [ "Mac" == "$machine" ]; then
 alias vim='mvim -v'
+fi
 export PATH=$PATH:/usr/local/sbin
