@@ -6,15 +6,13 @@ set number              "line number
 set statusline=%<\ %n:%f\ %m%r%y%=%-35.(line:\ %l\ of\ %L,\ col:\ %c%V\ (%P)%)
 set ai    			"automatically indentation
 syntax on 			"color
-set tabstop=4            "Replace tab as  four spaces
 set cursorline              " cursor line
 set t_Co=256                " support 256 color
 set backspace=2
 set nocompatible
 set shiftwidth=4
-set noswapfile
 let python_highlight_all = 1
-
+set noswapfile
 filetype plugin indent on
 
 " Nerdtree
@@ -60,9 +58,9 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 Bundle 'https://github.com/scrooloose/nerdtree'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'marijnh/tern_for_vim'
-
+Bundle 'YouCompleteMe'
+Plugin 'dracula/dracula-theme', {'rtp': 'vim/'}
+Bundle 'https://github.com/fatih/vim-go'
 
 " for yum
 let g:ycm_error_symbol = '>>'
@@ -86,9 +84,17 @@ colorscheme monokai
 autocmd BufWinEnter * match ExtraWhitespace /\s\+$\|if(.*)\|){\|(\s.*)\|}\n\{0,1}\<\(int\|string\|bool\|static\|void\)\>/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$\|if(.*)\|){\|(\s.*)\|}\n\{0,1}\<\(int\|string\|bool\|static\|void\)\>/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$\|if(.*)\|){\|(\s.*)\|}\n\{0,1}\<\(int\|string\|bool\|static\|void\)\>/
-highlight ExtraWhitespace ctermbg=darkblue guibg=bule
 
-function DoCscope ()
-	:!find ./ -name '*.c' -o -name '*.h' -o -name '*.cpp' -o -name '*.hpp' > cscope.files
-	:!cscope -Rbq -i cscope.files
-endfunction
+highlight ExtraWhitespace ctermbg=darkblue guibg=Orange
+set term=xterm-256color
+syntax on
+color Dracula
+
+let g:ycm_error_symbol = '>>'
+let g:ycm_warning_symbol = '>*'
+nnoremap gl :YcmCompleter GoToDeclaration<CR>
+nnoremap gf :YcmCompleter GoToDefinition<CR>
+nnoremap gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nmap <F4> :YcmDiags<CR>
+let g:ycm_goto_buffer_command ='new-tab'
+set expandtab sw=4 ts=4 sts=4
