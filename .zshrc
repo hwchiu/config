@@ -102,7 +102,7 @@ export GOPATH=$HOME/go/ # don't forget to change your path correctly!
 export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
-if [ "Mac" == "$machine" ]; then
+if [ "Mac" = "$machine" ]; then
 alias vim='mvim -v'
 fi
 export PATH=$PATH:/usr/local/sbin
