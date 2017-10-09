@@ -61,6 +61,7 @@ Bundle 'https://github.com/scrooloose/nerdtree'
 Bundle 'YouCompleteMe'
 Plugin 'dracula/dracula-theme', {'rtp': 'vim/'}
 Bundle 'https://github.com/fatih/vim-go'
+Bundle 'chase/vim-ansible-yaml'
 
 " for yum
 let g:ycm_error_symbol = '>>'
@@ -88,7 +89,7 @@ autocmd InsertLeave * match ExtraWhitespace /\s\+$\|if(.*)\|){\|(\s.*)\|}\n\{0,1
 highlight ExtraWhitespace ctermbg=darkblue guibg=Orange
 set term=xterm-256color
 syntax on
-color Dracula
+color dracula
 
 let g:ycm_error_symbol = '>>'
 let g:ycm_warning_symbol = '>*'
