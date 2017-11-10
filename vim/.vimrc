@@ -62,17 +62,9 @@ Bundle 'YouCompleteMe'
 Plugin 'dracula/dracula-theme', {'rtp': 'vim/'}
 Bundle 'https://github.com/fatih/vim-go'
 Bundle 'chase/vim-ansible-yaml'
+Bundle 'tpope/vim-fugitive'
 
 " for yum
-let g:ycm_error_symbol = '>>'
-let g:ycm_warning_symbol = '>*'
-nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
-nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
-nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
-nmap <F4> :YcmDiags<CR>
-let g:ycm_key_invoke_completion = ''
-let g:ycm_extra_conf_globlist = ['~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/','!~/*']
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 
 syntax enable
 colorscheme monokai
@@ -97,5 +89,8 @@ nnoremap gl :YcmCompleter GoToDeclaration<CR>
 nnoremap gf :YcmCompleter GoToDefinition<CR>
 nnoremap gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nmap <F4> :YcmDiags<CR>
+let g:ycm_key_invoke_completion = ''
+let g:ycm_extra_conf_globlist = ['~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/','!~/*']
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 let g:ycm_goto_buffer_command ='new-tab'
 set expandtab sw=4 ts=4 sts=4
