@@ -27,7 +27,6 @@ let NERDTreeIgnore=['\.pyc','\~$','\.swo$','\.swp$','\.git','\.hg','\.svn','\.bz
 let NERDTreeKeepTreeInNewTab=1
 let g:nerdtree_tabs_open_on_gui_startup=0
 
-set background=dark "background color
 nnoremap <silent> <F5> :NERDTree<CR>
 nnoremap <Esc>1 gt1
 nnoremap <Esc>2 gt2
@@ -57,17 +56,25 @@ endif
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
+call vundle#begin()
 Bundle 'https://github.com/scrooloose/nerdtree'
-Bundle 'YouCompleteMe'
 Plugin 'dracula/dracula-theme', {'rtp': 'vim/'}
 Bundle 'https://github.com/fatih/vim-go'
 Bundle 'chase/vim-ansible-yaml'
 Bundle 'tpope/vim-fugitive'
+Plugin 'c9s/helper.vim'
+Plugin 'c9s/treemenu.vim'
+Plugin 'c9s/vikube.vim'
+Plugin 'c9s/hypergit.vim'
+Plugin 'dgryski/vim-godef'
+Plugin 'nsf/gocode', {'rtp': 'vim/'}
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'dracula/vim'
+call vundle#end()
 
 " for yum
 
 syntax enable
-colorscheme monokai
 
 " for white space
 " if(.*) => if(xxx)
@@ -81,16 +88,21 @@ autocmd InsertLeave * match ExtraWhitespace /\s\+$\|if(.*)\|){\|(\s.*)\|}\n\{0,1
 highlight ExtraWhitespace ctermbg=darkblue guibg=Orange
 set term=xterm-256color
 syntax on
-color dracula
+set background=dark "background color
+color molokai
 
 let g:ycm_error_symbol = '>>'
 let g:ycm_warning_symbol = '>*'
-nnoremap gl :YcmCompleter GoToDeclaration<CR>
-nnoremap gf :YcmCompleter GoToDefinition<CR>
-nnoremap gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
-nmap <F4> :YcmDiags<CR>
-let g:ycm_key_invoke_completion = ''
-let g:ycm_extra_conf_globlist = ['~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/','!~/*']
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
-let g:ycm_goto_buffer_command ='new-tab'
+nmap <leader>G   :ToggleGitMenu<CR>
+"nnoremap gl :YcmCompleter GoToDeclaration<CR>
+"nnoremap gf :YcmCompleter GoToDefinition<CR>
+"nnoremap gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
+"nmap <F4> :YcmDiags<CR>
+"let g:ycm_key_invoke_completion = ''
+"let g:ycm_extra_conf_globlist = ['~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/','!~/*']
+"let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+"let g:ycm_goto_buffer_command ='new-tab'
+"let g:ycm_filetype_blacklist = {'kdescribe':1, 'vikube-pods':1}
+"let g:ycm_filetype_specific_completion_to_disable = {'vikube-pods': 1}
 set expandtab sw=4 ts=4 sts=4
+let g:godef_split=2
