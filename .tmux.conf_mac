@@ -29,6 +29,7 @@ set-window-option -g clock-mode-colour colour64
 # status bar right contents
 set -g status-right-length 65
 #set -g status-right "#[fg=colour187][#(itunesartist) - #(itunestrack)] #[fg=default][%H:%M %e-%b-%Y]"
+set -g status-right "#[fg=red,bright][ #[fg=cyan] #(kubectl config current-context) #[fg=red]]#[default] #[fg=yellow,bright]- %Y.%m.%d #[fg=green]%H:%M #[default]#[fg=magenta,bright]"
 set -g status-interval 5
 
 set-option -g mouse on
