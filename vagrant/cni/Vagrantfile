@@ -1,0 +1,41 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/xenial64"
+  config.vm.hostname = 'dev'
+
+  config.vm.provision "shell", privileged: false, inline: <<-SHELL
+    set -e -x -u
+    sudo apt-get update
+    sudo apt-get install -y vim git build-essential
+    # Install Golang
+    wget --quiet https://storage.googleapis.com/golang/go1.9.1.linux-amd64.tar.gz
+    sudo tar -zxf go1.9.1.linux-amd64.tar.gz -C /usr/local/
+    echo 'export GOROOT=/usr/local/go' >> $HOME/.bashrc
+    echo 'export GOPATH=$HOME/go' >> $HOME/.bashrc
+    echo 'export PATH=$PATH:$GOROOT/bin:$GOPATH/bin' >> $HOME/.bashrc
+    export GOROOT=/usr/local/go
+    export GOPATH=$HOME/go
+    export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+    mkdir -p $HOME/go/src
+    rm -rf $HOME/go1.9.1.linux-amd64.tar.gz
+    # Download CNI and CNI plugins binaries
+    wget --quiet https://github.com/containernetworking/cni/releases/download/v0.6.0/cni-amd64-v0.6.0.tgz
+    wget --quiet https://github.com/containernetworking/plugins/releases/download/v0.6.0/cni-plugins-amd64-v0.6.0.tgz
+    sudo mkdir -p /opt/cni/bin
+    sudo mkdir -p /etc/cni/net.d
+    sudo tar -zxf cni-amd64-v0.6.0.tgz -C /opt/cni/bin
+    sudo tar -zxf cni-plugins-amd64-v0.6.0.tgz -C /opt/cni/bin
+    rm -rf $HOME/cni-plugins-amd64-v0.6.0.tgz $HOME/cni-amd64-v0.6.0.tgz
+
+    git clone https://github.com/hwchiu/config
+  SHELL
+
+  config.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--cpus", 4]
+      # enable this when you want to have more memory
+      # v.customize ["modifyvm", :id, "--memory", 4096]
+      v.customize ['modifyvm', :id, '--nicpromisc1', 'allow-all']
+  end
+end
