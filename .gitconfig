@@ -2,7 +2,8 @@
 	name = hwchiu
 	email = hwchiu@cs.nctu.edu.tw
 [core]
-	editor = vim
+    editor = vim
+    excludesfile = /Users/hwchiu/.gitignore_global
 [color]
 	ui = auto
 	diff = auto

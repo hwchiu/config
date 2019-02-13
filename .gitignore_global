@@ -1,2 +1,4 @@
 *.swp
 cscope.*
+terraform.tfstate.*
+terraform.tfstate
