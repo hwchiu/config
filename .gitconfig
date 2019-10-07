@@ -1,6 +1,6 @@
 [user]
 	name = hwchiu
-	email = hwchiu@cs.nctu.edu.tw
+	email = hungwei@opennetworking.org
 [core]
     editor = vim
     excludesfile = /Users/hwchiu/.gitignore_global
@@ -18,3 +18,7 @@
 	co = checkout
 	df = diff
 	la = log --graph --decorate --pretty=oneline --abbrev-commit --all
+[gpg]
+	program = gpg2
+[commit]
+	gpgsign = true

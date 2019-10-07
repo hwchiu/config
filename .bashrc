@@ -106,7 +106,7 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 export GIT_AUTHOR_NAME=hwchiu
-export GIT_AUTHOR_EMAIL=hwchiu@linkernetworks.com
+export GIT_AUTHOR_EMAIL=hungwei@opennetworking.org
 function parse_git_branch {
    git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 }
