@@ -1,0 +1,20 @@
+{
+  "languageserver": {
+    "go": {
+      "command": "gopls",
+      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+      "trace.server": "verbose",
+      "filetypes": ["go"]
+    }
+  },
+  "snippets.ultisnips.directories": ["UltiSnips","gosnippets/UltiSnips"],
+  "yaml.format.enable": true,
+  "yaml.trace.server": "verbose",
+  "yaml.schemas": {
+    "http://json.schemastore.org/kustomization": "kustomization.yaml",
+    "kubernetes": "/*.yaml",
+    "https://json.schemastore.org/drone": ".drone.yml"
+  },
+  "list.source.files.excludePatterns": ["**/vendor/*"],
+  "list.source.grep.command": "ag"
+}
