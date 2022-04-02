@@ -1,6 +1,7 @@
 let $LANG = 'en'  "set message language
 set langmenu=en   "set menu's language of gvim. no spaces beside '='
 set encoding=UTF-8
+setlocal spell spelllang=en_us
 " Specify a directory for plugins
 " - For Neovim: ~/.local/share/nvim/plugged
 " - Avoid using standard Vim directory names like 'plugin'
@@ -22,8 +23,9 @@ Plug 'tpope/vim-speeddating'
 " Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-surround'
 
-Plug 'neomake/neomake'
-
+" fzf
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'rhysd/conflict-marker.vim'
 Plug 'godlygeek/tabular'
@@ -50,6 +52,10 @@ Plug 'arcticicestudio/nord-vim'
 " Plug 'connorholyday/vim-snazzy'
 " Plug 'NLKNguyen/papercolor-theme'
 " Plug 'dracula/vim', { 'as': 'dracula' }
+
+
+" Spelling
+Plug 'kamykn/spelunker.vim'
 
 " Initialize plugin system
 call plug#end()
@@ -94,8 +100,8 @@ map <Leader>k <Plug>(easymotion-k)
 
 " Full config: when writing or reading a buffer, and on changes in insert and
 " normal mode (after 500ms; no delay when writing).
-call neomake#configure#automake('nrwi', 500)
 
+let g:ale_yaml_yamllint_options='-d "{extends: default, rules: {line-length: disable, indentation: {spaces: 2, indent-sequences: whatever}}}"'
 set nocompatible
 filetype off
 filetype plugin indent on
@@ -114,6 +120,7 @@ noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
+
 
 "===================== CTAGS ======================
 nmap <leader>l :TagbarToggle<CR>
@@ -358,6 +365,7 @@ nnoremap <silent> <space>g  :<C-u>CocList grep<CR>
 
 " ==================== markdown ====================
 " plasticboy/vim-markdown
+let g:vim_markdown_conceal_code_blocks = 0
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_frontmatter = 1 " YMAL Front Matter
 let g:vim_markdown_json_frontmatter = 1 " JSON Front Mattetaugroup

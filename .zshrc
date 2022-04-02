@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$PATH:/Users/hwchiu/go/bin:/usr/local/opt/mysql-client/bin
 
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/hwchiu/.oh-my-zsh"
@@ -59,7 +59,9 @@ ZSH_THEME="bira"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
-
+export HISTSIZE=1000000000
+export SAVEHIST=$HISTSIZE
+setopt EXTENDED_HISTORY
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
@@ -68,7 +70,7 @@ ZSH_THEME="bira"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git aws)
+plugins=(git repo)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -89,6 +91,36 @@ source $ZSH/oh-my-zsh.sh
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
+function update_k8s_config {
+    mv ~/.kube/configs ~/.kube/configs-`date +%Y-%m-%d-%H%M%S`
+    mkdir ~/.kube/configs
+
+    #staging rancher
+    rancher server switch stage
+    for c in $(rancher clusters ls --format  '{{.Cluster.Name}}'); do
+        rancher cluster kf $c > ~/.kube/configs/$c
+    done
+
+    rancher server switch prod
+    for c in $(rancher clusters ls --format  '{{.Cluster.Name}}' | grep -v rancher); do
+        rancher cluster kf $c > ~/.kube/configs/$c
+    done
+
+    kubectl konfig merge ~/.kube/configs/* > ~/.kube/config
+}
+
+function aws_profile {
+    RED='\033[0;31m'
+    NC='\033[0m'
+    [[ ! -z ${AWS_PROFILE} ]] && echo "${RED}AWS${NC}:$AWS_PROFILE"
+}
+
+function k8s_profile {
+   BLUE='\033[0;34m'
+   NC='\033[0m'
+   echo -n "${BLUE}k8s-${NC}ctx:" && kubectl config current-context | tr '\n' ' '
+   echo -n "ns:" && kubectl ns -c
+}
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -97,4 +129,45 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-RPROMPT='$(aws_prompt_info)'"$RPROMPT"
+PROMPT='$(aws_profile) $(k8s_profile)'"$PROMPT"
+alias python='python3'
+export LC_ALL=en_US.UTF-8
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
+# tabtab source for slss package
+# uninstall by removing these lines or running `tabtab uninstall slss`
+[[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh
+
+source <(kubectl completion zsh)
+alias kc='kubectl'
+alias onos='ssh -q -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "$@"'
+complete -F __start_kubectl kc
+export GOPATH=/Users/hwchiu/onf
+export PATH=$(go env GOPATH)/bin:$PATH
+export GOOGLE_CREDENTIALS=/Users/hwchiu/hwchiu/gcp/credentials.json
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/hwchiu/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/hwchiu/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/hwchiu/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/hwchiu/google-cloud-sdk/completion.zsh.inc'; fi
+
+export PATH="$PATH:/Users/hwchiu/Library/Python/3.8/bin/:/Users/hwchiu/Library/Python/2.7/bin/"
+
+
+export NVM_DIR="/Users/hwchiu/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+export PATH="${PATH}:${HOME}/.krew/bin"
+export GOOGLE_BACKEND_CREDENTIALS=/Users/hwchiu/onf/credential/gcp.json; export GOOGLE_CREDENTIALS="/Users/hwchiu/onf/credential/gcp_provider.json"
+
+alias vim='nvim'
+alias vi='nvim'
+source ~/python_env/bin/activate
+export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --preview '(highlight -O ansi {} || cat {}) 2> /dev/null | head -500'"
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
