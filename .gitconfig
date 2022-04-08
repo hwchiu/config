@@ -1,6 +1,7 @@
 [user]
 	name = hwchiu
-	email = hungwei@opennetworking.org
+	email = sppsorrg@gmail.com
+	signingkey = BD6162E934DA8394
 [core]
     editor = vim
     excludesfile = /Users/hwchiu/.gitignore_global
